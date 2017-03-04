@@ -1,0 +1,5 @@
+1：测试NaN,本身是否相等
+
+2：valueof优先于toString，有valueOF方法的对象应该实现toString，返回valueof相同值的字符串
+
+3：测试值是否未定义：typeof，undefined

@@ -1,0 +1,3 @@
+1：隐式封装产生新对象
+“hello”.foo=10;
+"hello".foo;//undefind
