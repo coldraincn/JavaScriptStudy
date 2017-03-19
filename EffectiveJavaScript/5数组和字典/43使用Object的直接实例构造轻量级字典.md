@@ -1,0 +1,1 @@
+1：使用对象字面量构建轻量级字典，轻量级字典应是Object.prototype的直接子类，for in
