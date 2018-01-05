@@ -21,4 +21,4 @@ function testable(isTestable) {
   class MyTestableClass {}
   
   let obj = new MyTestableClass();
-  obj.isTestable // true
+  obj.isTestable // truegit 
