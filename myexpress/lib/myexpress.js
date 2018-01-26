@@ -15,6 +15,7 @@ const routes=[];
 //     res.end('hello word');
 // })
 //路由池遍历
+/** 
 const passRouter=(method,path)=>{
     let fn;
     for(let route of routes){
@@ -29,7 +30,38 @@ const passRouter=(method,path)=>{
     }
     return fn;
 }
+*/
+const lazy=function*(arr){
+    yield* arr;
+}
+const passRouter=(routes,method,path)=>(req,res)=>{
+    const lazyRoutes=lazy(routes);
+    (function next(){
+        const it = lazyRoutes.next().value;
+        if (!it) {
+            //已经遍历所有路由，没有匹配的路由，停止遍历
+            res.end(`Cannot ${method} ${pathname}`)
+            return;
+          } else if (it.method === 'use' 
+            && (it.path === '/'
+            || it.path === path
+            || path.startsWith(it.path.concat('/')))) {
+            //匹配到了中间件
+            it.fn(req, res, next);
+          } else if ((it.method === method
+            || it.method === 'all')
+            && (it.path === path
+            || it.path === '*')) {
+            //匹配到了路由
+            it.fn(req, res);
+          } else {
+            //继续匹配
+            next();
+          }
+    }
 
+    )()
+}
 app.listen = (port, host) => {
     http.createServer((req, res) => {
       const method = req.method.toLowerCase()

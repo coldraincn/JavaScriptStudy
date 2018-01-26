@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch index",
-            "program": "${workspaceFolder}/myexpress/index.js"
+            "program": "${workspaceFolder}/koa/demo/index.js"
         },
         {
             "type": "node",
